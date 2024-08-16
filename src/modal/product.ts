@@ -15,7 +15,6 @@ const productSchema = new Schema<IProduct>({
     type: Number,
   },
   code: {
-    required: true,
     type: Number,
   },
 },{timestamps:true});

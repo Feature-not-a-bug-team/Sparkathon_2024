@@ -20,6 +20,7 @@ export default function NavBar() {
   const menuItems: menuItem[] = [
     { slug: "Invoice", path: "/" },
     { slug: "Products", path: "/products" },
+    { slug: "Frequently Bought Together", path: "/frequentlyBoughtTogether" },
   ];
 
   return (

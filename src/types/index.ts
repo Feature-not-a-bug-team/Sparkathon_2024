@@ -15,13 +15,7 @@ export interface IInvoice {
     address: string;
     mobileNo: string;
     whatsAppNo: string;
-    nameOfLayout: string;
-    district: string;
-    tahasil: string;
-    mauza: string;
-    surveyNo: string;
-    plotNo: string;
-    araji: string;
+   
   };
   paylmentType: paymentType;
   products: {

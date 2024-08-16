@@ -1,8 +1,8 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import ProductCard from "@/components/product_card/ProductCard";
-import ProductForm from "@/components/productForm/ProductForm";
-import { useProductStore } from "@/store/zustand";
+'use client';
+import React, { useEffect, useState } from 'react';
+import ProductCard from '@/components/product_card/ProductCard';
+import ProductForm from '@/components/productForm/ProductForm';
+import { useProductStore } from '@/store/zustand';
 import {
   Navbar,
   NavbarContent,
@@ -10,16 +10,18 @@ import {
   Button,
   Autocomplete,
   AutocompleteItem,
-} from "@nextui-org/react";
-import { IProduct } from "@/types";
+} from '@nextui-org/react';
+import { IProduct } from '@/types';
+import { Product, RelatedProduct } from '../../types/products';
 
 export default function Products() {
+  const [productList,setProductList]=useState<Product | null>(null);
   const { products, loading } = useProductStore();
-  const [inputCode, setInputCode] = useState("");
+  const [inputCode, setInputCode] = useState('');
   const [search, setSearch] = useState(false);
   const [seleectedProudct, setSelectedProduct] = useState<IProduct>({
-    name: "",
-    _id: "",
+    name: '',
+    _id: '',
     code: 0,
     quantity: 0,
     price: 0,
@@ -29,8 +31,8 @@ export default function Products() {
     const searchProduct = products.find((p) => p.code == parseInt(inputCode));
     setSelectedProduct(
       searchProduct || {
-        name: "",
-        _id: "",
+        name: '',
+        _id: '',
         code: 0,
         quantity: 0,
         price: 0,
@@ -40,7 +42,7 @@ export default function Products() {
     console.log(products);
   };
   const handleKeyDown = (event: any) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       handleSearch();
     }
   };
@@ -48,8 +50,8 @@ export default function Products() {
     const searchProduct = products.find((p) => p.code == parseInt(inputCode));
     setSelectedProduct(
       searchProduct || {
-        name: "",
-        _id: "",
+        name: '',
+        _id: '',
         code: 0,
         quantity: 0,
         price: 0,
@@ -63,11 +65,11 @@ export default function Products() {
       <div className="flex justify-center gap-4">
         <Input
           classNames={{
-            base: "max-w-full h-10",
-            mainWrapper: "h-full",
-            input: "text-small",
+            base: 'max-w-full h-10',
+            mainWrapper: 'h-full',
+            input: 'text-small',
             inputWrapper:
-              "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+              'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
           }}
           placeholder="Type to search..."
           size="sm"
@@ -79,7 +81,7 @@ export default function Products() {
         />
         <Button onClick={handleSearch}>Search</Button>
       </div>
-      {inputCode == "" ? (
+      {inputCode == '' ? (
         <ProductCard products={products} loading={loading} />
       ) : (
         <ProductCard products={[seleectedProudct]} loading={loading} />

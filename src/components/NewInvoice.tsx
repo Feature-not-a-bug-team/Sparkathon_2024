@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Modal,
   ModalContent,
@@ -20,11 +20,11 @@ import {
   TableRow,
   TableCell,
   Pagination,
-} from "@nextui-org/react";
-import { IInvoice, IProduct, paymentType } from "@/types";
-import { useInvoiceStore, useProductStore } from "@/store/zustand";
-import AddProductToInvoice from "./AddProduct";
-import EditInvoiceItem from "./EditInvoiceItem";
+} from '@nextui-org/react';
+import { IInvoice, IProduct, paymentType } from '@/types';
+import { useInvoiceStore, useProductStore } from '@/store/zustand';
+import AddProductToInvoice from './AddProduct';
+import EditInvoiceItem from './EditInvoiceItem';
 
 export default function NewInvoicec() {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -34,7 +34,7 @@ export default function NewInvoicec() {
     quantity: number;
     price: number;
   }>({
-    name: "",
+    name: '',
     price: 0,
     quantity: 0,
   });
@@ -44,17 +44,10 @@ export default function NewInvoicec() {
   const [invoice, setInvoicee] = useState<IInvoice>({
     invoiceNumber: 0,
     user: {
-      name: "",
-      address: "",
-      mobileNo: "",
-      whatsAppNo: "",
-      nameOfLayout: "",
-      district: "",
-      tahasil: "",
-      mauza: "",
-      surveyNo: "",
-      plotNo: "",
-      araji: "",
+      name: '',
+      address: '',
+      mobileNo: '',
+      whatsAppNo: '',
     },
     paylmentType: paymentType.cash,
     products: [],
@@ -85,7 +78,7 @@ export default function NewInvoicec() {
   const handleClick = async () => {
     if (page == 0) {
       if (!isNext()) {
-        alert("Please fill everything");
+        alert('Please fill everything');
         return;
       }
       setPage(1);
@@ -98,8 +91,8 @@ export default function NewInvoicec() {
           return a + v;
         });
       const NewInvoice = (await (
-        await fetch("/api/invoice/", {
-          method: "POST",
+        await fetch('/api/invoice/', {
+          method: 'POST',
           body: JSON.stringify(invoice),
         })
       ).json()) as { updateProdcuts: IProduct[]; newInvoice: IInvoice };
@@ -111,22 +104,14 @@ export default function NewInvoicec() {
       setInvoicee({
         invoiceNumber: 0,
         user: {
-          name: "",
-          address: "",
-          mobileNo: "",
-          whatsAppNo: "",
-          nameOfLayout: "",
-          district: "",
-          tahasil: "",
-          mauza: "",
-          surveyNo: "",
-          plotNo: "",
-          araji: "",
+          name: '',
+          address: '',
+          mobileNo: '',
+          whatsAppNo: '',
         },
         paylmentType: paymentType.cash,
         products: [],
         totalPricec: 0,
-
       });
 
       onClose();
@@ -169,17 +154,10 @@ export default function NewInvoicec() {
           setInvoicee({
             invoiceNumber: 0,
             user: {
-              name: "",
-              address: "",
-              mobileNo: "",
-              whatsAppNo: "",
-              nameOfLayout: "",
-              district: "",
-              tahasil: "",
-              mauza: "",
-              surveyNo: "",
-              plotNo: "",
-              araji: "",
+              name: '',
+              address: '',
+              mobileNo: '',
+              whatsAppNo: '',
             },
             paylmentType: paymentType.cash,
             products: [],
@@ -270,143 +248,6 @@ export default function NewInvoicec() {
                           }}
                         />
                       </div>
-                    </div>
-
-                    <div className="text-xl mt-5">Plot Info</div>
-                    <div className="grid sm:grid-rows-3 sm:grid-cols-3 grid-cols-2 gap-3">
-                      <Input
-                        label="Layout name"
-                        placeholder="Layout name"
-                        variant="bordered"
-                        radius="sm"
-                        className="outline-none rounded-sm "
-                        value={invoice.user.nameOfLayout}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            user: {
-                              ...invoice.user,
-                              nameOfLayout: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <Input
-                        label="Tahasil"
-                        placeholder="Tahasil"
-                        variant="bordered"
-                        radius="sm"
-                        className="outline-none rounded-sm"
-                        value={invoice.user.tahasil}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            user: {
-                              ...invoice.user,
-                              tahasil: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <Input
-                        label="District"
-                        placeholder="District"
-                        variant="bordered"
-                        radius="sm"
-                        className="outline-none rounded-sm"
-                        value={invoice.user.district}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            user: {
-                              ...invoice.user,
-                              district: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <Input
-                        label="Mauza"
-                        placeholder="Mauza"
-                        variant="bordered"
-                        radius="sm"
-                        className="outline-none rounded-sm"
-                        value={invoice.user.mauza}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            user: {
-                              ...invoice.user,
-                              mauza: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <Input
-                        label="Survey no."
-                        placeholder="Survey no."
-                        variant="bordered"
-                        radius="sm"
-                        className="outline-none rounded-sm"
-                        value={invoice.user.surveyNo}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            user: {
-                              ...invoice.user,
-                              surveyNo: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <Input
-                        label="Plot no."
-                        placeholder="Plot no."
-                        variant="bordered"
-                        radius="sm"
-                        className="outline-none rounded-sm"
-                        value={invoice.user.plotNo}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            user: {
-                              ...invoice.user,
-                              plotNo: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <Input
-                        label="Arji"
-                        placeholder="Arji"
-                        variant="bordered"
-                        radius="sm"
-                        className="outline-none rounded-sm"
-                        value={invoice.user.araji}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            user: {
-                              ...invoice.user,
-                              araji: e.target.value,
-                            },
-                          });
-                        }}
-                      />
-                      <RadioGroup
-                        label="Payment type"
-                        orientation="horizontal"
-                        value={invoice.paylmentType}
-                        onChange={(e) => {
-                          setInvoicee({
-                            ...invoice,
-                            paylmentType: e.target.value as paymentType,
-                          });
-                        }}
-                      >
-                        <Radio value="cash">Cash</Radio>
-                        <Radio value="instalment">Instalment</Radio>
-                      </RadioGroup>
                     </div>
                   </>
                 ) : (
@@ -523,7 +364,7 @@ export default function NewInvoicec() {
                   isLoading={loading}
                   disabled={page == 0 ? false : false}
                 >
-                  {page == 0 ? "Next" : "Create"}
+                  {page == 0 ? 'Next' : 'Create'}
                 </Button>
               </ModalFooter>
             </>
